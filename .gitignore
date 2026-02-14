@@ -1,0 +1,18 @@
+# --- Hasil Kompilasi (Executable & Objects) ---
+*.exe
+*.o
+*.out
+*.obj
+*.app
+*.bin
+
+# --- Folder Konfigurasi Editor/IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# --- File Log & Temporary ---
+*.log
+*.tmp
