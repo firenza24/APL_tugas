@@ -1,0 +1,55 @@
+PROGRAM: AnalisisMatriksStatistik
+
+FUNGSI cariMin(matriks, baris, kolom)
+    SET min = matriks[0][0]
+    FOR i IN 0 TO baris - 1 DO
+        FOR j IN 0 TO kolom - 1 DO
+            IF matriks[i][j] < min THEN
+                SET min = matriks[i][j]
+            END IF
+        END FOR
+    END FOR
+    RETURN min
+END FUNGSI
+
+FUNGSI cariMax(matriks, baris, kolom)
+    SET max = matriks[0][0]
+    FOR i IN 0 TO baris - 1 DO
+        FOR j IN 0 TO kolom - 1 DO
+            IF matriks[i][j] > max THEN
+                SET max = matriks[i][j]
+            END IF
+        END FOR
+    END FOR
+    RETURN max
+END FUNGSI
+
+FUNGSI cariRataRata(matriks, baris, kolom)
+    SET jumlah = 0
+    SET banyakElemen = baris * kolom
+    FOR i IN 0 TO baris - 1 DO
+        FOR j IN 0 TO kolom - 1 DO
+            SET jumlah = jumlah + matriks[i][j]
+        END FOR
+    END FOR
+    SET rataRata = jumlah / banyakElemen
+    RETURN rataRata
+END FUNGSI
+
+ALGORITMA UTAMA (Main)
+    // Inisialisasi data
+    DEKLARASI matriks[2][3] = {{6, 7, 8}, {1, 5, 3}}
+    DEKLARASI baris = 2
+    DEKLARASI kolom = 3
+    
+    // Pemanggilan fungsi
+    SET nilaiMin = cariMin(matriks, baris, kolom)
+    SET nilaiMax = cariMax(matriks, baris, kolom)
+    SET nilaiRataRata = cariRataRata(matriks, baris, kolom)
+    
+    // Output hasil
+    PRINT "Nilai minimum = ", nilaiMin
+    PRINT "Nilai maksimum = ", nilaiMax
+    PRINT "Nilai rata-rata = ", nilaiRataRata
+END PROGRAM
+------------------------------------------------------------
