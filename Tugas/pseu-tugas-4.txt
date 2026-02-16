@@ -1,0 +1,89 @@
+PROGRAM: SistemPencarianDosenMatkul
+
+STRUKTUR MataKuliah
+    DEKLARASI no SEBAGAI INTEGER
+    DEKLARASI matkul SEBAGAI STRING
+    DEKLARASI sks SEBAGAI INTEGER
+    DEKLARASI namaDosen SEBAGAI STRING
+END STRUKTUR
+
+FUNGSI toLower(teks)
+    SET hasil = ubah tiap karakter teks ke huruf kecil
+    RETURN hasil
+END FUNGSI
+
+PROSEDUR tampilkanTabelMatkul(daftar, jumlah)
+    PRINT "Header Tabel (No, Nama Mata Kuliah, SKS)"
+    FOR i IN 0 TO jumlah - 1 DO
+        PRINT daftar[i].no, daftar[i].matkul, daftar[i].sks
+    END FOR
+END PROSEDUR
+
+PROSEDUR cariDosen(daftar, jumlah, kataKunci)
+    SET jumlahTerdeteksi = 0
+    SET kunciCari = toLower(kataKunci)
+    
+    FOR i IN 0 TO jumlah - 1 DO
+        SET matkulKecil = toLower(daftar[i].matkul)
+        
+        IF matkulKecil mengandung kunciCari THEN
+            IF jumlahTerdeteksi == 0 THEN
+                PRINT "Header Hasil (No, Nama Dosen, Mata Kuliah)"
+            END IF
+
+            SET teksDosen = daftar[i].namaDosen
+            
+            WHILE teksDosen mengandung " / " DO
+                SET posisiPemisah = cari posisi " / "
+                SET namaSatuDosen = ambil teks dari awal ke posisiPemisah
+                SET jumlahTerdeteksi = jumlahTerdeteksi + 1
+                
+                PRINT jumlahTerdeteksi, namaSatuDosen, daftar[i].matkul
+                SET teksDosen = hapus bagian yang sudah dicetak dari teksDosen
+            END WHILE
+            
+            SET jumlahTerdeteksi = jumlahTerdeteksi + 1
+            PRINT jumlahTerdeteksi, teksDosen, daftar[i].matkul
+        END IF
+    END FOR
+
+    IF jumlahTerdeteksi == 0 THEN
+        PRINT "Maaf, data tidak ditemukan."
+    END IF
+END PROSEDUR
+
+ALGORITMA UTAMA (Main)
+    // Inisialisasi data
+    DEKLARASI daftarKuliah[7] SEBAGAI MataKuliah
+    SET daftarKuliah = [
+        {1, "Aljabar Linear", 3, "Ir. Addy... / Muhammad Labib..."},
+        {2, "Algoritma dan Pemrograman Lanjut", 3, "Ir. Novianti... / Awang Harsa..."},
+        {3, "Basis Data", 3, "Ummul Hairah... / Ramadiani..."},
+        {4, "Pendidikan Bahasa Indonesia", 2, "Rasni Alex..."},
+        {5, "Pendidikan Karakter, Etika dan Profesi", 3, "Andi Tejawati..."},
+        {6, "Statistika", 3, "Prof. Dr. Fahrul... / Wasono..."},
+        {7, "Struktur Data", 3, "Masna Wati... / Rosmasari..."}
+    ]
+
+    WHILE TRUE DO
+        BERSIHKAN_LAYAR()
+        PRINT "===== DAFTAR MATA KULIAH ====="
+        PANGGIL tampilkanTabelMatkul(daftarKuliah, 7)
+
+        INPUT kunci
+        SET kunciCek = toLower(kunci)
+
+        IF kunciCek == "0" OR kunciCek == "keluar" THEN
+            BREAK
+        END IF
+
+        IF kunci TIDAK KOSONG THEN
+            BERSIHKAN_LAYAR()
+            PANGGIL cariDosen(daftarKuliah, 7, kunci)
+            PRINT "Tekan ENTER untuk lanjut..."
+            BACA_INPUT()
+        END IF
+    END WHILE
+
+    PRINT "Program Selesai. Sampai Jumpa!"
+END PROGRAM

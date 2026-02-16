@@ -1,0 +1,41 @@
+PROGRAM: PengolahanMatriksSederhana
+
+ALGORITMA UTAMA (Main)
+    DEKLARASI baris, kolom: INTEGER
+    DEKLARASI total: REAL = 0
+    
+    PRINT "Masukkan jumlah baris: "
+    INPUT baris
+    PRINT "Masukkan jumlah kolom: "
+    INPUT kolom
+    
+    // Deklarasi array 2D
+    DEKLARASI matriks[baris][kolom]: INTEGER
+
+    PRINT "Masukkan elemen matriks (bilangan bulat):"
+
+    FOR i IN 0 TO baris - 1 DO
+        FOR j IN 0 TO kolom - 1 DO
+            PRINT "Elemen [", i, "][", j, "]: "
+            INPUT matriks[i][j]
+            SET total = total + matriks[i][j]
+        END FOR
+    END FOR
+
+    PRINT "Tampilan matriks:"
+    FOR i IN 0 TO baris - 1 DO
+        PRINT "[ "
+        FOR j IN 0 TO kolom - 1 DO
+            PRINT matriks[i][j], " "
+        END FOR
+        PRINT "]"
+    END FOR
+
+    SET banyakElemen = baris * kolom
+    SET rataRata = total / banyakElemen
+
+    PRINT "Total Elemen    : ", banyakElemen
+    PRINT "Total Nilai     : ", total
+    PRINT "Nilai Rata-rata : ", rataRata
+    
+END PROGRAM

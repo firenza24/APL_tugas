@@ -1,0 +1,43 @@
+PROGRAM: InversMatriks2x2
+
+ALGORITMA UTAMA (Main)
+    SET baris = 2
+    SET kolom = 2
+    DEKLARASI matriks[baris][kolom]
+    DEKLARASI invers[baris][kolom]
+    DEKLARASI det
+
+    PRINT "Masukkan elemen matriks 2x2 (Bilangan Bulat):"
+    FOR i IN 0 TO baris - 1 DO
+        FOR j IN 0 TO kolom - 1 DO
+            PRINT "Elemen [" + i + "][" + j + "]: "
+            INPUT matriks[i][j]
+        END FOR
+    END FOR
+
+    // Menghitung Determinan: (a * d) - (b * c)
+    SET det = (matriks[0][0] * matriks[1][1]) - (matriks[0][1] * matriks[1][0])
+
+    PRINT "Determinan: ", det
+
+    // Cek kondisi matriks (apakah memiliki invers)
+    IF det == 0 THEN
+        PRINT "Matriks Singular (determinan = 0)!"
+    ELSE
+        // Menghitung elemen matriks invers
+        SET invers[0][0] = matriks[1][1] / det
+        SET invers[0][1] = -matriks[0][1] / det
+        SET invers[1][0] = -matriks[1][0] / det
+        SET invers[1][1] = matriks[0][0] / det
+
+        PRINT "Invers Matriks adalah:"
+        FOR i IN 0 TO baris - 1 DO
+            PRINT "[ "
+            FOR j IN 0 TO kolom - 1 DO
+                PRINT invers[i][j] + "    "
+            END FOR
+            PRINT " ]"
+        END FOR
+    END IF
+
+END PROGRAM
